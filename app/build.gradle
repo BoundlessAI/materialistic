@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "io.github.hidroh.materialistic"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 76
         versionName "3.2"
@@ -62,6 +62,7 @@ ext {
     retrofitVersion = '2.3.0'
     roomVersion = '1.0.0'
     archVersion = '1.1.0'
+    boundlessKitVersion = '4.0.8'
 }
 
 dependencies {
@@ -82,7 +83,8 @@ dependencies {
             "android.arch.persistence.room:runtime:$roomVersion",
             "android.arch.lifecycle:extensions:$archVersion",
             "android.arch.lifecycle:common-java8:$archVersion",
-            "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            "boundless:boundlesskit:$boundlessKitVersion"
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android${rootProject.hasProperty("leak") ? "" : "-no-op"}:$leakCanaryVersion"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"

@@ -38,7 +38,7 @@
 
     <application
         android:name=".Application"
-        android:supportsRtl="false"
+        android:supportsRtl="true"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup"
         android:icon="@mipmap/ic_launcher"

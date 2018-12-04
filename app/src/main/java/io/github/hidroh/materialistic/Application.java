@@ -18,7 +18,6 @@ package io.github.hidroh.materialistic;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.squareup.leakcanary.LeakCanary;
@@ -26,7 +25,10 @@ import com.squareup.leakcanary.RefWatcher;
 
 import dagger.ObjectGraph;
 import io.github.hidroh.materialistic.data.AlgoliaClient;
+import kit.boundless.BoundlessKit;
 import rx.schedulers.Schedulers;
+
+//import boundless.boundlesskit.BoundlessKit;
 
 public class Application extends android.app.Application implements Injectable {
 
@@ -52,19 +54,21 @@ public class Application extends android.app.Application implements Injectable {
         AlgoliaClient.sSortByTime = Preferences.isSortByRecent(this);
         mRefWatcher = LeakCanary.install(this);
         if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                    .detectAll()
-                    .penaltyFlashScreen()
-                    .build());
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                    .detectAll()
-                    .penaltyLog()
-                    .build());
+//            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+//                    .detectAll()
+//                    .penaltyFlashScreen()
+//                    .build());
+//            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+//                    .detectAll()
+//                    .penaltyLog()
+//                    .build());
         }
         Preferences.migrate(this);
         TYPE_FACE = FontCache.getInstance().get(this, Preferences.Theme.getTypeface(this));
         AppUtils.registerAccountsUpdatedListener(this);
         AdBlocker.init(this, Schedulers.io());
+
+        BoundlessKit.enableDebugMode(true);
     }
 
     @Override

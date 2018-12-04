@@ -66,6 +66,10 @@ import io.github.hidroh.materialistic.widget.ItemPagerAdapter;
 import io.github.hidroh.materialistic.widget.NavFloatingActionButton;
 import io.github.hidroh.materialistic.widget.PopupMenu;
 import io.github.hidroh.materialistic.widget.ViewPager;
+import kit.boundless.BoundlessKit;
+import kit.boundless.internal.data.BoundlessAction;
+import kit.boundless.reward.PulseAnimator;
+import kit.boundless.reward.RotationAnimator;
 
 public class ItemActivity extends InjectableActivity implements ItemFragment.ItemChangedListener {
 
@@ -234,6 +238,42 @@ public class ItemActivity extends InjectableActivity implements ItemFragment.Ite
         outState.putParcelable(STATE_ITEM, mItem);
         outState.putString(STATE_ITEM_ID, mItemId);
         outState.putBoolean(STATE_FULLSCREEN, mFullscreen);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        BoundlessKit.enableDebugMode(true);
+        BoundlessKit.reinforce(this, "openStory", null, new BoundlessKit.ReinforcementCallback() {
+            @Override
+            public void onReinforcement(String reinforcementDecision) {
+                BoundlessKit.debugLog("openStory", "Reinforcement decision:" + reinforcementDecision);
+                switch (reinforcementDecision) {
+
+                    case "reward1":
+                        new RotationAnimator()
+                                .setCount(2)
+                                .setTarget(mVoteButton)
+                                .setStartDelay(300)
+                                .start();
+                        break;
+
+                    case "reward2":
+                        new PulseAnimator()
+                                .setCount(3)
+                                .setScale(2.7f)
+                                .setTarget(mBookmark)
+                                .start();
+                        break;
+
+                    case BoundlessAction.NEUTRAL_DECISION:
+
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     @Override
