@@ -253,14 +253,15 @@ public class ItemActivity extends InjectableActivity implements ItemFragment.Ite
 
                     case "reward1":
                         new RotationAnimator()
+                                .setStartDelay(500)
                                 .setCount(2)
                                 .setTarget(mVoteButton)
-                                .setStartDelay(300)
                                 .start();
                         break;
 
                     case "reward2":
                         new PulseAnimator()
+                                .setStartDelay(500)
                                 .setCount(3)
                                 .setScale(2.7f)
                                 .setTarget(mBookmark)
@@ -268,8 +269,6 @@ public class ItemActivity extends InjectableActivity implements ItemFragment.Ite
                         break;
 
                     case BoundlessAction.NEUTRAL_DECISION:
-
-                    default:
                         break;
                 }
             }
